@@ -9,8 +9,8 @@
 <style type="text/css">
 
         #mynetwork {
-            width: 500px;
-            height: 500px;
+            width: 800px;
+            height: 800px;
             background-color: #ffffff;
             border: 1px solid lightgray;
             position: relative;
@@ -47,8 +47,8 @@
         
 
         // parsing and collecting nodes and edges from the python
-        nodes = new vis.DataSet([{"id": 0, "label": "ALARM CLOCK BAKELIKE PINK", "shape": "dot"}, {"id": 1, "label": "SET/6 RED SPOTTY PAPER PLATES", "shape": "dot"}, {"id": 2, "label": "DOLLY GIRL LUNCH BOX", "shape": "dot"}, {"id": 3, "label": "SPACEBOY LUNCH BOX", "shape": "dot"}, {"id": 4, "label": "SET/6 RED SPOTTY PAPER CUPS", "shape": "dot"}, {"id": 5, "label": "PLASTERS IN TIN WOODLAND ANIMALS", "shape": "dot"}, {"id": 6, "label": "SET/20 RED RETROSPOT PAPER NAPKINS", "shape": "dot"}, {"id": 7, "label": "PLASTERS IN TIN SPACEBOY", "shape": "dot"}, {"id": 8, "label": "PLASTERS IN TIN CIRCUS PARADE", "shape": "dot"}, {"id": 9, "label": "ALARM CLOCK BAKELIKE GREEN", "shape": "dot"}, {"id": 10, "label": "ALARM CLOCK BAKELIKE RED", "shape": "dot"}]);
-        edges = new vis.DataSet([{"from": 4, "to": 1, "weight": 0.888888888888889}, {"from": 5, "to": 7, "weight": 0.6119402985074628}, {"from": 4, "to": 6, "weight": 0.7407407407407408}, {"from": 6, "to": 1, "weight": 0.7692307692307692}, {"from": 8, "to": 5, "weight": 0.6060606060606061}, {"from": 8, "to": 7, "weight": 0.5303030303030304}, {"from": 10, "to": 9, "weight": 0.8378378378378379}, {"from": 9, "to": 0, "weight": 0.7631578947368421}, {"from": 10, "to": 0, "weight": 0.7837837837837838}, {"from": 3, "to": 2, "weight": 0.5714285714285714}]);
+        nodes = new vis.DataSet([{"id": "X", "label": "X", "shape": "dot"}, {"id": "Y", "label": "Y", "shape": "dot"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "X", "to": "Y"}]);
 
         // adding nodes and edges to the graph
         data = {nodes: nodes, edges: edges};
