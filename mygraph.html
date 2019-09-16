@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "SPACEBOY CHILDRENS BOWL", "label": "SPACEBOY CHILDRENS BOWL", "shape": "dot", "value": 0.04157549234135667}, {"id": "SPACEBOY CHILDRENS CUP", "label": "SPACEBOY CHILDRENS CUP", "shape": "dot", "value": 0.04157549234135667}, {"id": "CHILDRENS CUTLERY SPACEBOY", "label": "CHILDRENS CUTLERY SPACEBOY", "shape": "dot", "value": 0.04814004376367615}, {"id": "CHILDRENS CUTLERY DOLLY GIRL", "label": "CHILDRENS CUTLERY DOLLY GIRL", "shape": "dot", "value": 0.04814004376367615}, {"id": "SET/6 RED SPOTTY PAPER PLATES", "label": "SET/6 RED SPOTTY PAPER PLATES", "shape": "dot", "value": 0.05689277899343545}, {"id": "SET/6 RED SPOTTY PAPER CUPS", "label": "SET/6 RED SPOTTY PAPER CUPS", "shape": "dot", "value": 0.05689277899343545}, {"id": "COFFEE MUG PEARS  DESIGN", "label": "COFFEE MUG PEARS  DESIGN", "shape": "dot", "value": 0.03938730853391685}, {"id": "COFFEE MUG APPLES DESIGN", "label": "COFFEE MUG APPLES DESIGN", "shape": "dot", "value": 0.03938730853391685}, {"id": "RED RETROSPOT CUP", "label": "RED RETROSPOT CUP", "shape": "dot", "value": 0.0700218818380744}, {"id": "BLUE POLKADOT CUP", "label": "BLUE POLKADOT CUP", "shape": "dot", "value": 0.0700218818380744}, {"id": "RED RETROSPOT CHARLOTTE BAG", "label": "RED RETROSPOT CHARLOTTE BAG", "shape": "dot", "value": 0.0700218818380744}, {"id": "WOODLAND CHARLOTTE BAG", "label": "WOODLAND CHARLOTTE BAG", "shape": "dot", "value": 0.0700218818380744}, {"id": "CHARLOTTE BAG SUKI DESIGN", "label": "CHARLOTTE BAG SUKI DESIGN", "shape": "dot", "value": 0.045951859956236324}, {"id": "JUMBO BAG RED RETROSPOT", "label": "JUMBO BAG RED RETROSPOT", "shape": "dot", "value": 0.0787746170678337}, {"id": "JUMBO BAG WOODLAND ANIMALS", "label": "JUMBO BAG WOODLAND ANIMALS", "shape": "dot", "value": 0.0787746170678337}, {"id": "PLASTERS IN TIN STRONGMAN", "label": "PLASTERS IN TIN STRONGMAN", "shape": "dot", "value": 0.0700218818380744}, {"id": "PLASTERS IN TIN CIRCUS PARADE", "label": "PLASTERS IN TIN CIRCUS PARADE", "shape": "dot", "value": 0.0700218818380744}, {"id": "PLASTERS IN TIN WOODLAND ANIMALS", "label": "PLASTERS IN TIN WOODLAND ANIMALS", "shape": "dot", "value": 0.04814004376367615}, {"id": "ROUND SNACK BOXES SET OF4 WOODLAND", "label": "ROUND SNACK BOXES SET OF4 WOODLAND", "shape": "dot", "value": 0.13785557986870897}, {"id": "PLASTERS IN TIN SPACEBOY", "label": "PLASTERS IN TIN SPACEBOY", "shape": "dot", "value": 0.061269146608315096}, {"id": "ROUND SNACK BOXES SET OF 4 FRUITS", "label": "ROUND SNACK BOXES SET OF 4 FRUITS", "shape": "dot", "value": 0.05689277899343545}, {"id": "RED TOADSTOOL LED NIGHT LIGHT", "label": "RED TOADSTOOL LED NIGHT LIGHT", "shape": "dot", "value": 0.12691466083150985}, {"id": "6 RIBBONS RUSTIC CHARM", "label": "6 RIBBONS RUSTIC CHARM", "shape": "dot", "value": 0.10284463894967177}, {"id": "REGENCY CAKESTAND 3 TIER", "label": "REGENCY CAKESTAND 3 TIER", "shape": "dot", "value": 0.10284463894967177}, {"id": "SPACEBOY LUNCH BOX", "label": "SPACEBOY LUNCH BOX", "shape": "dot", "value": 0.10284463894967177}, {"id": "PACK OF 20 NAPKINS RED APPLES", "label": "PACK OF 20 NAPKINS RED APPLES", "shape": "dot", "value": 0.05908096280087528}, {"id": "CHARLOTTE BAG APPLES DESIGN", "label": "CHARLOTTE BAG APPLES DESIGN", "shape": "dot", "value": 0.06564551422319474}, {"id": "LUNCH BAG APPLE DESIGN", "label": "LUNCH BAG APPLE DESIGN", "shape": "dot", "value": 0.061269146608315096}, {"id": "RED RETROSPOT MINI CASES", "label": "RED RETROSPOT MINI CASES", "shape": "dot", "value": 0.06564551422319474}, {"id": "STRAWBERRY LUNCH BOX WITH CUTLERY", "label": "STRAWBERRY LUNCH BOX WITH CUTLERY", "shape": "dot", "value": 0.0787746170678337}, {"id": "LUNCH BOX WITH CUTLERY RETROSPOT", "label": "LUNCH BOX WITH CUTLERY RETROSPOT", "shape": "dot", "value": 0.06345733041575492}, {"id": "WOODLAND PARTY BAG + STICKER SET", "label": "WOODLAND PARTY BAG + STICKER SET", "shape": "dot", "value": 0.24507658643326038}, {"id": "GUMBALL COAT RACK", "label": "GUMBALL COAT RACK", "shape": "dot", "value": 0.07221006564551423}, {"id": "LUNCH BAG WOODLAND", "label": "LUNCH BAG WOODLAND", "shape": "dot", "value": 0.24507658643326038}]);
+        edges = new vis.DataSet([{"arrowStriketrhough": false, "arrows": "to", "from": "SPACEBOY CHILDRENS BOWL", "physics": false, "to": "SPACEBOY CHILDRENS CUP", "value": 18.168490153172886}, {"arrowStriketrhough": false, "arrows": "to", "from": "CHILDRENS CUTLERY SPACEBOY", "physics": false, "to": "CHILDRENS CUTLERY DOLLY GIRL", "value": 10.446389496717726}, {"arrowStriketrhough": false, "arrows": "to", "from": "SET/6 RED SPOTTY PAPER PLATES", "physics": false, "to": "SET/6 RED SPOTTY PAPER CUPS", "value": 9.85382932166302}, {"arrowStriketrhough": false, "arrows": "to", "from": "COFFEE MUG PEARS  DESIGN", "physics": false, "to": "COFFEE MUG APPLES DESIGN", "value": 16.89715536105032}, {"arrowStriketrhough": false, "arrows": "to", "from": "RED RETROSPOT CUP", "physics": false, "to": "BLUE POLKADOT CUP", "value": 3.807439824945295}, {"arrowStriketrhough": false, "arrows": "to", "from": "RED RETROSPOT CHARLOTTE BAG", "physics": false, "to": "WOODLAND CHARLOTTE BAG", "value": 11.175492341356682}, {"arrowStriketrhough": false, "arrows": "to", "from": "CHARLOTTE BAG SUKI DESIGN", "physics": false, "to": "WOODLAND CHARLOTTE BAG", "value": 9.167396061269148}, {"arrowStriketrhough": false, "arrows": "to", "from": "JUMBO BAG RED RETROSPOT", "physics": false, "to": "JUMBO BAG WOODLAND ANIMALS", "value": 4.625195373554234}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN STRONGMAN", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 5.657768052516412}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 6.322392414296132}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN WOODLAND ANIMALS", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 2.5517947762931232}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN WOODLAND ANIMALS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.640700218818381}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN SPACEBOY", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 4.125455871626549}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "PLASTERS IN TIN SPACEBOY", "value": 3.6901531728665207}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 6.258205689277898}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 3.7571115973741795}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "PLASTERS IN TIN SPACEBOY", "value": 3.37272064186725}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 4.153968569723493}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN SPACEBOY", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 4.0233406272793575}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 4.442013129102844}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN SPACEBOY", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 3.2086879001539836}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 2.2650236093516067}, {"arrowStriketrhough": false, "arrows": "to", "from": "WOODLAND CHARLOTTE BAG", "physics": false, "to": "JUMBO BAG WOODLAND ANIMALS", "value": 2.8978847556528087}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN STRONGMAN", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 3.448577680525164}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 3.8191101385849735}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 11.072210065645507}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 10.56892778993436}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 9.059080962800872}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.434851800278496}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 8.6816192560175}, {"arrowStriketrhough": false, "arrows": "to", "from": "WOODLAND CHARLOTTE BAG", "physics": false, "to": "RED TOADSTOOL LED NIGHT LIGHT", "value": 2.556866093825052}, {"arrowStriketrhough": false, "arrows": "to", "from": "6 RIBBONS RUSTIC CHARM", "physics": false, "to": "REGENCY CAKESTAND 3 TIER", "value": 2.894341981869334}, {"arrowStriketrhough": false, "arrows": "to", "from": "SPACEBOY LUNCH BOX", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 4.730853391684901}, {"arrowStriketrhough": false, "arrows": "to", "from": "SPACEBOY LUNCH BOX", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.721954777534646}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 2.5979547179922298}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.7083279701377263}, {"arrowStriketrhough": false, "arrows": "to", "from": "RED TOADSTOOL LED NIGHT LIGHT", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 2.709596748984057}, {"arrowStriketrhough": false, "arrows": "to", "from": "PACK OF 20 NAPKINS RED APPLES", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 4.0765864332603945}, {"arrowStriketrhough": false, "arrows": "to", "from": "CHARLOTTE BAG APPLES DESIGN", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.774617067833699}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF 4 FRUITS", "physics": false, "to": "SPACEBOY LUNCH BOX", "value": 2.3924142961342088}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.6004039723952204}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "WOODLAND CHARLOTTE BAG", "value": 2.4945295404814005}, {"arrowStriketrhough": false, "arrows": "to", "from": "LUNCH BAG APPLE DESIGN", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.5229759299781183}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "LUNCH BAG APPLE DESIGN", "value": 2.1903719912472646}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN CIRCUS PARADE", "physics": false, "to": "REGENCY CAKESTAND 3 TIER", "value": 2.5385363481643566}, {"arrowStriketrhough": false, "arrows": "to", "from": "RED RETROSPOT MINI CASES", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.4842619087695685}, {"arrowStriketrhough": false, "arrows": "to", "from": "WOODLAND CHARLOTTE BAG", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 2.641196995682772}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 2.5233495223354856}, {"arrowStriketrhough": false, "arrows": "to", "from": "STRAWBERRY LUNCH BOX WITH CUTLERY", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.3971553610503276}, {"arrowStriketrhough": false, "arrows": "to", "from": "LUNCH BOX WITH CUTLERY RETROSPOT", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.3681198451439154}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "WOODLAND PARTY BAG + STICKER SET", "value": 2.1979500172751356}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN WOODLAND ANIMALS", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 2.5889950365586807}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "PLASTERS IN TIN WOODLAND ANIMALS", "value": 2.475901924479605}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "RED RETROSPOT CUP", "value": 2.1927905101923297}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN SPACEBOY", "physics": false, "to": "ROUND SNACK BOXES SET OF 4 FRUITS", "value": 2.5018234865061992}, {"arrowStriketrhough": false, "arrows": "to", "from": "WOODLAND CHARLOTTE BAG", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 3.0196936542669586}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "PLASTERS IN TIN CIRCUS PARADE", "value": 2.3025800213729584}, {"arrowStriketrhough": false, "arrows": "to", "from": "GUMBALL COAT RACK", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.9308791350238126}, {"arrowStriketrhough": false, "arrows": "to", "from": "RED TOADSTOOL LED NIGHT LIGHT", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.8884026258205693}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "LUNCH BAG WOODLAND", "value": 2.172152481861108}, {"arrowStriketrhough": false, "arrows": "to", "from": "PLASTERS IN TIN SPACEBOY", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.740092389982981}, {"arrowStriketrhough": false, "arrows": "to", "from": "ROUND SNACK BOXES SET OF4 WOODLAND", "physics": false, "to": "JUMBO BAG WOODLAND ANIMALS", "value": 2.120557411033053}, {"arrowStriketrhough": false, "arrows": "to", "from": "6 RIBBONS RUSTIC CHARM", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.2891226088797914}, {"arrowStriketrhough": false, "arrows": "to", "from": "REGENCY CAKESTAND 3 TIER", "physics": false, "to": "ROUND SNACK BOXES SET OF4 WOODLAND", "value": 2.1137855579868714}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

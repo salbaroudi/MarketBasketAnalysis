@@ -6,7 +6,7 @@ import numpy as np
 import altair as alt
 from datetime import datetime
 from datetime import timedelta
-import pyvis
+
 
 
 #Settings
